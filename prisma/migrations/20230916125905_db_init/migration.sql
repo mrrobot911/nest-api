@@ -20,7 +20,7 @@ CREATE TABLE "Products" (
     "updatedAt" TIMESTAMP(3) NOT NULL,
     "title" TEXT NOT NULL,
     "price" INTEGER NOT NULL,
-    "description" TEXT NOT NULL,
+    "description" TEXT,
     "category" INTEGER NOT NULL,
     "images" TEXT[],
 
