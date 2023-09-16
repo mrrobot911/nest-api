@@ -1,3 +1,4 @@
+import { ApiProperty } from '@nestjs/swagger';
 import {
   ArrayMinSize,
   IsArray,
@@ -8,22 +9,27 @@ import {
 } from 'class-validator';
 
 export class CreateProductDto {
+  @ApiProperty()
   @IsString()
   @IsNotEmpty()
   title: string;
 
+  @ApiProperty()
   @IsNumber()
   @IsNotEmpty()
   price: number;
 
+  @ApiProperty()
   @IsString()
   @IsOptional()
   description?: string;
 
+  @ApiProperty()
   @IsNumber()
   @IsNotEmpty()
   category: number;
 
+  @ApiProperty()
   @IsArray()
   @IsString({ each: true })
   @ArrayMinSize(1)
