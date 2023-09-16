@@ -10,7 +10,6 @@ async function bootstrap() {
     .setTitle('Products API')
     .setDescription('Made by KelWin')
     .setVersion('1.0')
-    .addTag('market')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('docs', app, document);
