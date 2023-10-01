@@ -1,10 +1,14 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { Images } from '@prisma/client';
+import { Type } from 'class-transformer';
 import {
   ArrayMinSize,
   IsArray,
+  IsNotEmpty,
   IsNumber,
   IsOptional,
   IsString,
+  ValidateNested,
 } from 'class-validator';
 
 export class EditProductDto {
@@ -24,13 +28,19 @@ export class EditProductDto {
   description?: string;
 
   @ApiProperty()
-  @IsNumber()
   @IsOptional()
-  category?: number;
+  category?: string;
 
   @ApiProperty()
   @IsArray()
-  @IsString({ each: true })
+  @ValidateNested({ each: true })
   @ArrayMinSize(1)
-  images?: string[];
+  @IsOptional()
+  @Type(() => Image)
+  images: Images[];
+}
+class Image {
+  @IsString()
+  @IsNotEmpty()
+  url: string;
 }

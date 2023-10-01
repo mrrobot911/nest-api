@@ -17,7 +17,6 @@ export class UsersService {
     });
 
     delete user.hash;
-    console.log(user);
 
     return user;
   }

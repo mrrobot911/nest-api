@@ -10,28 +10,48 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 model Users {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id              Int      @id @default(autoincrement())
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 
-  email String @unique
-  hash  String
+  email           String @unique
+  hash            String
 
-  firstName String?
-  lastName  String?
+  firstName       String?
+  lastName        String?
 
-  role String
-  avatar String?
+  role            RoleType @default(USER)
+  avatar          String?
 }
 
 model Products {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id              Int      @id @default(autoincrement())
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
   
-  title	String
-  price	Int
-  description	String?
-  category	Int
-  images	String[]
+  title	          String
+  price	          Int
+  description	    String?
+  category	      Category @relation(fields: [category_id], references: [id])
+  category_id     Int
+  images	        Images[]
+}
+model Category {
+  id              Int @id @default(autoincrement())
+  name            String  @unique
+  products        Products[]
+}
+
+model Images {
+  id              Int @id @default(autoincrement())
+  url             String
+  created_at      DateTime @default(now())
+  updated_at      DateTime @updatedAt
+  product_id      Int
+  product         Products @relation(fields: [product_id], references: [id])
+}
+
+enum RoleType {
+  USER
+  ADMIN
 }

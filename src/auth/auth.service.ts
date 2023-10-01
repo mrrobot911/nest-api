@@ -5,7 +5,6 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
-
 @Injectable()
 export class AuthService {
   constructor(
@@ -20,7 +19,6 @@ export class AuthService {
         data: {
           email: dto.email,
           hash,
-          role: 'user',
         },
       });
       return user;
